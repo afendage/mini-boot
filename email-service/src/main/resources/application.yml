@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: email-service
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  # 邮箱配置
+#  mail:
+#    host: smtp.qq.com  # 示例：QQ邮箱SMTP服务器
+#    port: 587
+#    username: 380881399@qq.com
+#    password: lpnyykxxavjqbhce  # 邮箱授权码（非登录密码）
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: huxingbingdg@gmail.com
+    password: xquk ylku wmvj vfum
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+# 自定义配置
+app:
+  verify-code:
+    length: 6  # 验证码长度
+    expire-seconds: 150  # 过期时间（3分钟）
+    send-interval-seconds: 60  # 发送间隔限制（1分钟）
+    email-template: "您的注册验证码为：%s，有效期%d分钟，请勿泄露。"  # 邮件内容模板
+
+
+
+
