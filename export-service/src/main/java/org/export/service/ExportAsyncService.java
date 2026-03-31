@@ -1,0 +1,41 @@
+package org.export.service;
+
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.write.metadata.WriteSheet;
+import org.export.limiter.ExportLimiter;
+import org.export.util.AutoWidthStrategy;
+import org.export.util.ExcelExportUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.function.Function;
+
+@Service
+public class ExportAsyncService {
+
+    @Autowired
+    private ExportLimiter limiter;
+
+    @Async
+    public <T> void export(Long taskId, Function<Integer, List<T>> pageQuery, Class<T> clazz, String lang) {
+        try {
+            ExcelWriter writer = EasyExcel.write("export_" + taskId + ".xlsx").registerWriteHandler(new AutoWidthStrategy()).build();
+            WriteSheet sheet = EasyExcel.writerSheet("sheet").head(ExcelExportUtil.buildHead(clazz, lang)).build();
+            int page = 1;
+            while (true) {
+                List<T> list = pageQuery.apply(page);
+                if (list.isEmpty()) {
+                    break;
+                }
+                writer.write(ExcelExportUtil.buildBody(list, clazz, lang), sheet);
+                page++;
+            }
+            writer.finish();
+        } finally {
+            limiter.releaseGlobal();
+        }
+    }
+}

@@ -27,6 +27,7 @@
         <module>login-service</module>
         <module>google-auth</module>
         <module>operator-log</module>
+        <module>export-service</module>
     </modules>
 
     <dependencies>
