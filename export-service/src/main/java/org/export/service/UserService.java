@@ -1,13 +1,13 @@
 package org.export.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import jakarta.annotation.Resource;
 import org.export.entity.User;
 import org.export.mapper.UserMapper;
 import org.export.vo.UserExportVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 

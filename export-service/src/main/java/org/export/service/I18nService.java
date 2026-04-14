@@ -1,9 +1,9 @@
 package org.export.service;
 
+import jakarta.annotation.Resource;
 import org.export.mapper.I18nMapper;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
