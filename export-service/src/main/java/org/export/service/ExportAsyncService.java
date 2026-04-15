@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Service
 public class ExportAsyncService {
@@ -19,6 +20,9 @@ public class ExportAsyncService {
     @Autowired
     private ExportLimiter limiter;
 
+    /**
+     * 分页导出
+     */
     @Async
     public <T> void export(Long taskId, Function<Integer, List<T>> pageQuery, Class<T> clazz, String lang) {
         try {
@@ -32,6 +36,24 @@ public class ExportAsyncService {
                 }
                 writer.write(ExcelExportUtil.buildBody(list, clazz, lang), sheet);
                 page++;
+            }
+            writer.finish();
+        } finally {
+            limiter.releaseGlobal();
+        }
+    }
+
+    /**
+     * 一次性导出
+     */
+    @Async
+    public <T> void exportAll(Long taskId, Supplier<List<T>> fullQuery, Class<T> clazz, String lang) {
+        try {
+            ExcelWriter writer = EasyExcel.write("export_" + taskId + ".xlsx").registerWriteHandler(new AutoWidthStrategy()).build();
+            WriteSheet sheet = EasyExcel.writerSheet("sheet").head(ExcelExportUtil.buildHead(clazz, lang)).build();
+            List<T> list = fullQuery.get();
+            if (list != null && !list.isEmpty()) {
+                writer.write(ExcelExportUtil.buildBody(list, clazz, lang), sheet);
             }
             writer.finish();
         } finally {

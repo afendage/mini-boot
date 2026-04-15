@@ -5,14 +5,13 @@ import org.export.annotation.ExcelColumn;
 import org.export.annotation.ExcelDate;
 import org.export.annotation.ExcelDict;
 import org.export.annotation.ExcelEnum;
-
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class UserExportVo {
 
     @ExcelColumn("user.name")
-    private String loginName;
+    private String name;
 
     @ExcelColumn("user.gender")
     @ExcelDict(dict = "gender")
@@ -28,5 +27,5 @@ public class UserExportVo {
 
     @ExcelColumn("user.time")
     @ExcelDate("yyyy-MM-dd HH:mm:ss")
-    private Date createdDate;
+    private LocalDateTime createTime;
 }

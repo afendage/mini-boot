@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ * @author aengus
+ */
 @RestController
 @RequestMapping("/export")
 public class ExportController {
@@ -24,8 +26,8 @@ public class ExportController {
     @Resource
     private UserService userService;
 
-    @PostMapping
-    public String export(@RequestHeader("lang") String lang) {
+    @PostMapping("export_user")
+    public String exportUser(@RequestHeader("lang") String lang) {
         String userId = "1001";
         if (!limiter.tryUser(userId)) {
             return "操作频繁";
@@ -34,7 +36,7 @@ public class ExportController {
             return "系统繁忙";
         }
         Long taskId = System.currentTimeMillis();
-        asyncService.export(taskId, page -> userService.query(), UserExportVo.class, lang);
+        asyncService.exportAll(taskId, () -> userService.query(), UserExportVo.class, lang);
         return "任务ID：" + taskId;
     }
 }

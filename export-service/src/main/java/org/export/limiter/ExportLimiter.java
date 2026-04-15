@@ -16,7 +16,7 @@ public class ExportLimiter {
         String key = "export:user:" + userId;
         Long c = redis.opsForValue().increment(key);
         if (c == 1) {
-            redis.expire(key, 60, TimeUnit.SECONDS);
+            redis.expire(key, 5, TimeUnit.SECONDS);
         }
         return c <= 3;
     }

@@ -12,9 +12,11 @@ public class User {
 
     private String name;
 
-    private Integer age;
-
     private Integer status;
+
+    private String gender;
+
+    private String country;
 
     private LocalDateTime createTime;
 
