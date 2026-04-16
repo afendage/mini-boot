@@ -1,5 +1,7 @@
 package org.export.util;
 
+import jakarta.annotation.Resource;
+import lombok.val;
 import org.export.annotation.ExcelColumn;
 import org.export.annotation.ExcelDate;
 import org.export.annotation.ExcelDict;
@@ -7,6 +9,7 @@ import org.export.annotation.ExcelEnum;
 import org.export.service.ColumnI18nService;
 import org.export.service.DictService;
 import org.export.service.I18nService;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
@@ -14,28 +17,47 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * 导出工具类
+ */
+@Component
 public class ExcelExportUtil {
 
-    // 👉 统一字段顺序（核心）
+    @Resource
+    private ColumnI18nService columnI18n;
+
+    @Resource
+    private DictService dict;
+
+    @Resource
+    private I18nService i18n;
+
+
+    /**
+     * 获取列头
+     */
     private static <T> List<Field> getExcelFields(Class<T> clazz) {
         return Arrays.stream(clazz.getDeclaredFields()).filter(f -> f.isAnnotationPresent(ExcelColumn.class)).sorted(Comparator.comparing(Field::getName))
                 .toList();
     }
 
-    public static <T> List<List<String>> buildHead(Class<T> clazz, String lang) {
-        ColumnI18nService i18n = SpringContext.getBean(ColumnI18nService.class);
+    /**
+     * 构建列头
+     */
+    public <T> List<List<String>> buildHead(Class<T> clazz, String lang) {
         List<Field> fields = getExcelFields(clazz);
         List<List<String>> head = new ArrayList<>();
         for (Field f : fields) {
             ExcelColumn col = f.getAnnotation(ExcelColumn.class);
-            head.add(Collections.singletonList(i18n.get(col.value(), lang)));
+            head.add(Collections.singletonList(columnI18n.get(col.value(), lang)));
         }
         return head;
     }
 
-    public static <T> List<List<Object>> buildBody(List<T> data, Class<T> clazz, String lang) {
-        I18nService i18n = SpringContext.getBean(I18nService.class);
-        DictService dict = SpringContext.getBean(DictService.class);
+    /**
+     * 构建导出数据
+     */
+    public <T> List<List<Object>> buildBody(List<T> data, Class<T> clazz, String lang) {
         List<Field> fields = getExcelFields(clazz);
         List<List<Object>> rows = new ArrayList<>();
         for (T obj : data) {
@@ -71,7 +93,6 @@ public class ExcelExportUtil {
 
             rows.add(row);
         }
-
         return rows;
     }
 }

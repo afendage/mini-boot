@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 自动设置列宽度
+ */
 public class AutoWidthStrategy extends AbstractColumnWidthStyleStrategy {
 
     private static final int MAX_COLUMN_WIDTH = 50;
