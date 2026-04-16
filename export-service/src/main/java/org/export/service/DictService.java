@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 字典转义 service
+ */
 @Service
 public class DictService {
 

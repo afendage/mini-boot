@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author aengus
+ * 控制导出接口的访问频率
  */
 @Component
 public class ExportLimiter {

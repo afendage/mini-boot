@@ -4,6 +4,9 @@ import lombok.Data;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 
+/**
+ * 用户表
+ */
 @Data
 @TableName("t_user")
 public class User {

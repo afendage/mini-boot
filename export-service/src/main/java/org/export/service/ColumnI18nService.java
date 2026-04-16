@@ -7,10 +7,13 @@ import org.export.entity.I18nColumn;
 import org.export.mapper.ColumnI18nMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author aengus
+ * i18n 表结构配置(表头) service
+ */
 @Service
 public class ColumnI18nService {
 

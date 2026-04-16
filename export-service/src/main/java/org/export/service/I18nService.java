@@ -4,14 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.annotation.Resource;
 import org.export.entity.I18n;
-import org.export.entity.I18nColumn;
 import org.export.mapper.I18nMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author aengus
+ * 数据转义配置 service
+ */
 @Service
 public class I18nService {
 

@@ -5,6 +5,7 @@ import lombok.Data;
 
 /**
  * @author aengus
+ * 表结构-转义字典表
  */
 @Data
 @TableName("t_i18n_column")

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author aengus
+ * i18n 表结构配置(表头) controller
  */
 @RestController
 @RequestMapping("/i18nColumn")

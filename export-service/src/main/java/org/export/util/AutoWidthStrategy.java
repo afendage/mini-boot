@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 自动设置列宽度
+ * 自动设置excel列宽度
  */
 public class AutoWidthStrategy extends AbstractColumnWidthStyleStrategy {
 

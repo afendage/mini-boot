@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author aengus
+ * 数据转义配置 controller
  */
 @RestController
 @RequestMapping("/i18n")

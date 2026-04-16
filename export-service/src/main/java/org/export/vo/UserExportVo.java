@@ -7,6 +7,9 @@ import org.export.annotation.ExcelDict;
 import org.export.annotation.ExcelEnum;
 import java.time.LocalDateTime;
 
+/**
+ * 用户返回
+ */
 @Data
 public class UserExportVo {
 

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author aengus
+ * 数据-转义字典表
  */
 @Data
 @TableName("t_i18n")
