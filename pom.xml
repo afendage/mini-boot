@@ -28,6 +28,7 @@
         <module>google-auth</module>
         <module>operator-log</module>
         <module>export-service</module>
+        <module>gateway-service</module>
     </modules>
 
     <dependencies>
